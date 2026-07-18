@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cadence — typing speed test</title>
+<meta name="description" content="A minimalist typing speed test. Track your words-per-minute, accuracy, and consistency — all in your browser.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0f1115">
+<meta property="og:type" content="website">
+<meta property="og:title" content="cadence — typing speed test">
+<meta property="og:description" content="A minimalist typing speed test. Track your WPM, accuracy, and consistency — all in your browser.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cadence — typing speed test">
+<meta name="twitter:description" content="A minimalist typing speed test. Track your WPM, accuracy, and consistency — all in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='7' y='2' width='2' height='12' rx='1' fill='%238b97ad'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="brand" aria-label="cadence">
+    <span class="brand-name">cadence</span>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="switch theme"></button>
+  </header>
+
+  <nav class="settings" id="settingsBar" aria-label="test settings"></nav>
+
+  <section class="stage" id="stage">
+    <div class="live-stats" id="liveStats" aria-hidden="true"></div>
+    <div class="typing-area" id="typingArea">
+      <div class="margin-heckle" id="marginHeckle" aria-hidden="true"></div>
+      <div class="progress" id="progress" aria-hidden="true"><i id="progressFill"></i></div>
+      <div class="viewport" id="viewport" aria-hidden="true">
+        <div class="words" id="words"></div>
+        <div class="caret" id="caret"></div>
+      </div>
+      <div class="heckle-toast" id="heckleToast" aria-hidden="true"></div>
+      <div class="hint" id="hint">start typing</div>
+      <div class="focus-overlay" id="focusOverlay" hidden><span>click to focus</span></div>
+    </div>
+    <input id="ghost" class="ghost-input" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="typing test input">
+  </section>
+
+  <section class="results" id="results" hidden aria-live="polite">
+    <p class="res-eulogy" id="resEulogy"></p>
+    <div class="res-main">
+      <div class="res-wpm">
+        <span id="resWpm">0</span>
+        <span class="res-wpm-label">wpm</span>
+      </div>
+      <dl class="res-grid">
+        <div><dt>accuracy</dt><dd id="resAcc">–</dd></div>
+        <div><dt>raw</dt><dd id="resRaw">–</dd></div>
+        <div><dt>consistency</dt><dd id="resCon">–</dd></div>
+        <div><dt>peak</dt><dd id="resPeak">–</dd></div>
+        <div><dt>best</dt><dd id="resBest">–</dd></div>
+        <div><dt>words</dt><dd id="resWords">–</dd></div>
+        <div><dt>characters</dt><dd id="resChars">–</dd></div>
+        <div><dt>time</dt><dd id="resTime">–</dd></div>
+        <div><dt>test</dt><dd id="resMode">–</dd></div>
+      </dl>
+    </div>
+    <canvas id="spark" class="res-spark" height="120" aria-label="words per minute over time"></canvas>
+    <p class="res-pb" id="resPb"></p>
+    <div class="res-actions">
+      <button id="btnNext" class="btn primary">next test <kbd>enter</kbd></button>
+      <button id="btnRepeat" class="btn">repeat</button>
+      <button id="btnSettings" class="btn">settings</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="foot-keys">hold <kbd>tab</kbd> to reset</span>
+  </footer>
+
+  <div class="reset-overlay" id="resetOverlay" hidden aria-hidden="true">
+    <div class="reset-ring" id="resetRing">
+      <div class="rr-glow" id="resetGlow"></div>
+      <svg class="rr-svg" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="rr-track" cx="60" cy="60" r="52"></circle>
+        <circle class="rr-arc" id="resetArc" cx="60" cy="60" r="52"></circle>
+      </svg>
+    </div>
+    <div class="rr-label" id="resetLabel">hold to reset</div>
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
